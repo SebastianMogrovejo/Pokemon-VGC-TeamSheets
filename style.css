@@ -69,7 +69,7 @@ h1 {
 .pokemon-card-header input {
   flex: 1;
   border: none;
-  border-bottom: 1.5px solid rgba(255,255,255,0.35);
+ascas  border-bottom: 1.5px solid rgba(255,255,255,0.35);
   background: transparent;
   font-size: 1rem;
   font-weight: 600;
@@ -261,12 +261,73 @@ h1 {
   display: none !important;
 }
 
-/* Responsive */
-@media (max-width: 620px) {
+/* Responsive — Tablet */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px 16px;
+    border-radius: 8px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .stats-col {
+    min-width: 58px;
+  }
+}
+
+/* Responsive — Mobile */
+@media (max-width: 560px) {
+  body {
+    padding: 12px 8px;
+  }
+
+  .container {
+    padding: 16px 12px;
+    border-radius: 6px;
+  }
+
+  h1 {
+    font-size: 1.25rem;
+  }
+
   .pokemon-grid {
     grid-template-columns: 1fr;
   }
-  .field-row label {
-    min-width: 140px;
+
+  #generateBtn {
+    width: 100%;
+  }
+
+  .pokemon-card-header .label {
+    min-width: 55px;
+    font-size: 0.85rem;
+  }
+
+  .pokemon-row .row-label {
+    min-width: 60px;
+    font-size: 0.8rem;
+  }
+
+  .stats-col {
+    min-width: 52px;
+  }
+
+  .stat-row .stat-label {
+    font-size: 0.6rem;
+  }
+
+  .stat-row input {
+    font-size: 0.8rem;
+  }
+
+  .pokemon-row input {
+    font-size: 0.85rem;
+  }
+
+  #showdownText {
+    font-size: 0.8rem;
+    rows: 10;
   }
 }
