@@ -58,18 +58,26 @@ function collectData() {
   return data;
 }
 
+function normalizeText(str) {
+  return str
+    .replace(/[ñ]/g, 'n')
+    .replace(/[Ñ]/g, 'N')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+}
+
 function buildShowdownPaste(data) {
   const blocks = [];
   data.pokemon.forEach(p => {
     if (!p.name) return;
     const lines = [];
-    let header = p.name;
-    if (p.item) header += ` @ ${p.item}`;
+    let header = normalizeText(p.name);
+    if (p.item) header += ` @ ${normalizeText(p.item)}`;
     lines.push(header);
-    if (p.ability) lines.push(`Ability: ${p.ability}`);
+    if (p.ability) lines.push(`Ability: ${normalizeText(p.ability)}`);
     lines.push('Level: 50');
     ['move1', 'move2', 'move3', 'move4'].forEach(m => {
-      if (p[m]) lines.push(`- ${p[m]}`);
+      if (p[m]) lines.push(`- ${normalizeText(p[m])}`);
     });
     blocks.push(lines.join('\n'));
   });
@@ -99,5 +107,20 @@ function copyCode() {
   });
 }
 
+// Restrict inputs: only letters (including accented and ñ) and spaces
+function setupInputRestriction() {
+  document.addEventListener('input', function (e) {
+    if (e.target.matches('input[type="text"][data-field]')) {
+      const cleaned = e.target.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÈÌÒÙâêîôûÂÊÎÔÛäëïöüÄËÏÖÜñÑ ]/g, '');
+      if (e.target.value !== cleaned) {
+        const pos = e.target.selectionStart - (e.target.value.length - cleaned.length);
+        e.target.value = cleaned;
+        e.target.setSelectionRange(pos, pos);
+      }
+    }
+  });
+}
+
 // Init
 buildPokemonCards();
+setupInputRestriction();
