@@ -6,8 +6,8 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f0f4f8;
-  color: #1a1a2e;
+  background: #38AA38;
+  color: #1a1a1a;
   padding: 24px 16px;
 }
 
@@ -24,7 +24,9 @@ h1 {
   text-align: center;
   font-size: 1.8rem;
   margin-bottom: 4px;
-  color: #16213e;
+  color: #1a1a1a;
+  font-weight: 900;
+  letter-spacing: -0.5px;
 }
 
 .subtitle {
@@ -32,44 +34,6 @@ h1 {
   color: #666;
   margin-bottom: 24px;
   font-style: italic;
-}
-
-/* Player Info */
-.player-info {
-  border: 1.5px solid #ccc;
-  border-radius: 8px;
-  padding: 16px 20px;
-  margin-bottom: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.field-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.field-row label {
-  font-weight: 600;
-  min-width: 220px;
-  font-size: 0.9rem;
-}
-
-.field-row input {
-  flex: 1;
-  border: none;
-  border-bottom: 1.5px solid #aaa;
-  padding: 4px 6px;
-  font-size: 0.95rem;
-  outline: none;
-  background: transparent;
-  transition: border-color 0.2s;
-}
-
-.field-row input:focus {
-  border-bottom-color: #4361ee;
 }
 
 /* Pokemon Grid */
@@ -81,7 +45,7 @@ h1 {
 }
 
 .pokemon-card {
-  border: 1.5px solid #333;
+  border: 2px solid #1a1a1a;
   border-radius: 8px;
   overflow: hidden;
 }
@@ -89,36 +53,43 @@ h1 {
 .pokemon-card-header {
   display: flex;
   align-items: center;
-  background: #eef0f4;
+  background: #1a1a1a;
   padding: 6px 10px;
   gap: 10px;
-  border-bottom: 1.5px solid #333;
+  border-bottom: 2px solid #1a1a1a;
 }
 
 .pokemon-card-header .label {
   font-weight: 700;
   font-size: 0.95rem;
   min-width: 70px;
+  color: #fff;
 }
 
 .pokemon-card-header input {
   flex: 1;
   border: none;
-  border-bottom: 1.5px solid #aaa;
+  border-bottom: 1.5px solid rgba(255,255,255,0.35);
   background: transparent;
   font-size: 1rem;
   font-weight: 600;
   padding: 2px 4px;
   outline: none;
+  color: #fff;
+}
+
+.pokemon-card-header input::placeholder {
+  color: rgba(255,255,255,0.4);
 }
 
 .pokemon-card-header input:focus {
-  border-bottom-color: #4361ee;
+  border-bottom-color: #38AA38;
 }
 
 .pokemon-card-body {
   display: grid;
   grid-template-columns: 1fr auto;
+  background: #fff;
 }
 
 .pokemon-fields {
@@ -131,10 +102,21 @@ h1 {
   border-bottom: 1px solid #ddd;
   padding: 5px 10px;
   gap: 8px;
+  background: #fff;
 }
 
 .pokemon-row:last-child {
   border-bottom: none;
+}
+
+/* Ability & Held Item highlighted rows */
+.pokemon-row--info {
+  background: #e6f7e6;
+  border-bottom-color: #b8e0b8;
+}
+
+.pokemon-row--info .row-label {
+  color: #1e6e1e;
 }
 
 .pokemon-row .row-label {
@@ -154,15 +136,16 @@ h1 {
 }
 
 .pokemon-row input:focus {
-  border-bottom-color: #4361ee;
+  border-bottom-color: #38AA38;
 }
 
 /* Stats column */
 .stats-col {
-  border-left: 1.5px solid #333;
+  border-left: 2px solid #1a1a1a;
   display: flex;
   flex-direction: column;
   min-width: 68px;
+  background: #fff;
 }
 
 .stat-row {
@@ -194,7 +177,7 @@ h1 {
 }
 
 .stat-row input:focus {
-  border-bottom-color: #4361ee;
+  border-bottom-color: #38AA38;
 }
 
 /* Generate section */
@@ -203,7 +186,7 @@ h1 {
 }
 
 #generateBtn {
-  background: #4361ee;
+  background: #38AA38;
   color: #fff;
   border: none;
   padding: 12px 40px;
@@ -216,7 +199,7 @@ h1 {
 }
 
 #generateBtn:hover {
-  background: #3451d1;
+  background: #2d8f2d;
   transform: translateY(-1px);
 }
 
@@ -227,8 +210,8 @@ h1 {
 .code-output {
   margin-top: 20px;
   padding: 16px 20px;
-  background: #f8f9ff;
-  border: 1.5px solid #4361ee;
+  background: #f4fbf4;
+  border: 1.5px solid #38AA38;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -244,26 +227,13 @@ h1 {
   gap: 10px;
 }
 
-.code-label {
-  font-size: 0.9rem;
-  color: #555;
-}
-
-#uniqueCode {
-  font-family: 'Courier New', monospace;
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: #4361ee;
-}
-
 #showdownText {
   width: 100%;
   font-family: 'Courier New', monospace;
   font-size: 0.9rem;
   line-height: 1.6;
   padding: 12px;
-  border: 1.5px solid #c5ccf5;
+  border: 1.5px solid #b2deb2;
   border-radius: 6px;
   background: #fff;
   color: #1a1a2e;
@@ -272,7 +242,7 @@ h1 {
 }
 
 .copy-btn {
-  background: #4361ee;
+  background: #38AA38;
   border: none;
   color: #fff;
   font-weight: 600;
@@ -284,7 +254,7 @@ h1 {
 }
 
 .copy-btn:hover {
-  background: #3451d1;
+  background: #2d8f2d;
 }
 
 .hidden {
