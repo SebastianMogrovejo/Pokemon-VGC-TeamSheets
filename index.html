@@ -36,9 +36,11 @@
     <div class="generate-section">
       <button id="generateBtn" onclick="generateCode()">Generar</button>
       <div id="codeOutput" class="code-output hidden">
-        <p>Tu código único:</p>
-        <span id="uniqueCode"></span>
-        <button class="copy-btn" onclick="copyCode()">Copiar</button>
+        <div class="code-header">
+          <span class="code-label">Código: <strong id="uniqueCode"></strong></span>
+          <button class="copy-btn" onclick="copyCode()">Copiar team</button>
+        </div>
+        <textarea id="showdownText" readonly rows="14" spellcheck="false"></textarea>
       </div>
     </div>
   </div>

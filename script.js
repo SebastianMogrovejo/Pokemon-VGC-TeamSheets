@@ -1,6 +1,5 @@
 const POKEMON_COUNT = 6;
 
-const STATS = ['Level', 'HP', 'Atk', 'Def', 'Sp. Atk', 'Sp. Def', 'Speed'];
 
 function buildPokemonCards() {
   const grid = document.getElementById('pokemonGrid');
@@ -13,10 +12,6 @@ function buildPokemonCards() {
         </div>
         <div class="pokemon-card-body">
           <div class="pokemon-fields">
-            <div class="pokemon-row">
-              <span class="row-label">Tera Type</span>
-              <input type="text" placeholder="" data-pokemon="${i}" data-field="tera" />
-            </div>
             <div class="pokemon-row">
               <span class="row-label">Ability</span>
               <input type="text" placeholder="" data-pokemon="${i}" data-field="ability" />
@@ -42,14 +37,6 @@ function buildPokemonCards() {
               <input type="text" placeholder="" data-pokemon="${i}" data-field="move4" />
             </div>
           </div>
-          <div class="stats-col">
-            ${STATS.map(s => `
-              <div class="stat-row">
-                <span class="stat-label">${s}</span>
-                <input type="number" min="0" data-pokemon="${i}" data-field="stat_${s.replace(/ /g,'_').toLowerCase()}" />
-              </div>
-            `).join('')}
-          </div>
         </div>
       </div>
     `;
@@ -74,26 +61,43 @@ function collectData() {
   return data;
 }
 
+function buildShowdownPaste(data) {
+  const blocks = [];
+  data.pokemon.forEach(p => {
+    if (!p.name) return;
+    const lines = [];
+    let header = p.name;
+    if (p.item) header += ` @ ${p.item}`;
+    lines.push(header);
+    if (p.ability) lines.push(`Ability: ${p.ability}`);
+    lines.push('Level: 50');
+    ['move1', 'move2', 'move3', 'move4'].forEach(m => {
+      if (p[m]) lines.push(`- ${p[m]}`);
+    });
+    blocks.push(lines.join('\n'));
+  });
+  return blocks.join('\n\n');
+}
+
 function generateCode() {
   const data = collectData();
-  const json = JSON.stringify(data);
-  const encoded = btoa(encodeURIComponent(json));
+  const paste = buildShowdownPaste(data);
 
-  // Create a short readable code: first 6 chars of a hash + timestamp suffix
+  // Generate unique code
+  const encoded = btoa(encodeURIComponent(paste));
   const hash = cyrb53(encoded).toString(36).toUpperCase().padStart(8, '0');
   const suffix = Date.now().toString(36).toUpperCase().slice(-4);
   const code = `${hash}-${suffix}`;
 
   document.getElementById('uniqueCode').textContent = code;
+  document.getElementById('showdownText').value = paste;
   document.getElementById('codeOutput').classList.remove('hidden');
-
-  // Store full encoded data in sessionStorage keyed by code for later use
-  sessionStorage.setItem(`team_${code}`, encoded);
+  document.getElementById('codeOutput').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 function copyCode() {
-  const code = document.getElementById('uniqueCode').textContent;
-  navigator.clipboard.writeText(code).then(() => {
+  const text = document.getElementById('showdownText').value;
+  navigator.clipboard.writeText(text).then(() => {
     const btn = document.querySelector('.copy-btn');
     btn.textContent = '¡Copiado!';
     setTimeout(() => { btn.textContent = 'Copiar'; }, 2000);

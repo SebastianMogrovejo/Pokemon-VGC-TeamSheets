@@ -230,42 +230,61 @@ h1 {
   background: #f8f9ff;
   border: 1.5px solid #4361ee;
   border-radius: 8px;
-  display: inline-flex;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
 }
 
-.code-output p {
-  font-weight: 600;
-  color: #333;
+.code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.code-label {
+  font-size: 0.9rem;
+  color: #555;
 }
 
 #uniqueCode {
   font-family: 'Courier New', monospace;
-  font-size: 1.2rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   color: #4361ee;
-  background: #e8ecff;
-  padding: 6px 14px;
+}
+
+#showdownText {
+  width: 100%;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  padding: 12px;
+  border: 1.5px solid #c5ccf5;
   border-radius: 6px;
+  background: #fff;
+  color: #1a1a2e;
+  resize: vertical;
+  outline: none;
 }
 
 .copy-btn {
-  background: #e8ecff;
-  border: 1.5px solid #4361ee;
-  color: #4361ee;
+  background: #4361ee;
+  border: none;
+  color: #fff;
   font-weight: 600;
-  padding: 6px 16px;
+  padding: 8px 20px;
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.2s;
+  white-space: nowrap;
 }
 
 .copy-btn:hover {
-  background: #d0d8ff;
+  background: #3451d1;
 }
 
 .hidden {
